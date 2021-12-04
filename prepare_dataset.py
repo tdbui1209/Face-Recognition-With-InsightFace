@@ -16,6 +16,11 @@ ap.add_argument('--data-path', default='./datasets',
 ap.add_argument('--output-path', default='./model',
                 help='Path to output features, targets')
 
+ap.add_argument('--name-features', default='X',
+                help='Name output features')
+
+ap.add_argument('--name-targets', default='y',
+                help='Name output targets')
 
 args = ap.parse_args()
 
@@ -38,9 +43,11 @@ for file_name in file_names:
             image_file = os.path.join(data_path, file_name, image + ext_name)
             if os.path.exists(image_file):
                 img = cv2.imread(image_file)
+                if img is None:
+                    raise ValueError(f"{os.path.join(data_path, image_file)} doesn't have any face")
                 faces = app.get(img)
                 if len(faces) != 1:
-                    raise ValueError(f"{os.path.join(data_path, file_name, image)} doesn't have exactly one face")
+                    raise ValueError(f"{os.path.join(data_path, image_file)} doesn't have exactly one face")
 
                 face = faces[0]
                 X.append(face.embedding)
@@ -50,7 +57,7 @@ for file_name in file_names:
 X = np.array(X)
 y = np.array(y)
 
-np.save(os.path.join(args.output, 'X.npy'), X)
-np.save(os.path.join(args.output, 'y.npy'), y)
+np.save(os.path.join(args.output_path, args.name_features), X)
+np.save(os.path.join(args.output_path, args.name_targets), y)
 
 cv2.destroyAllWindows()
