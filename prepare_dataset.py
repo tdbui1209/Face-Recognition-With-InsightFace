@@ -10,7 +10,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('--name', default='webface',
                 help='Name of your model zoo')
 
-ap.add_argument('--data-path', default='./dataset',
+ap.add_argument('--data-path', default='./datasets',
                 help='Path to training dataset')
 
 ap.add_argument('--output', default='./model',
@@ -20,7 +20,7 @@ ap.add_argument('--output', default='./model',
 args = ap.parse_args()
 
 app = FaceAnalysis(name=args.name)
-app.prepare(ctx_id=0, det_size=(640, 40))
+app.prepare(ctx_id=0, det_size=(640, 640))
 
 data_path = args.data_path
 file_names = [i for i in os.listdir(data_path)]
