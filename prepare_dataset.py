@@ -13,7 +13,7 @@ ap.add_argument('--name', default='webface',
 ap.add_argument('--data-path', default='./datasets',
                 help='Path to training dataset')
 
-ap.add_argument('--output', default='./model',
+ap.add_argument('--output-path', default='./model',
                 help='Path to output features, targets')
 
 
