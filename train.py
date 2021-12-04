@@ -3,6 +3,7 @@ import argparse
 import pickle
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
 
 
 ap = argparse.ArgumentParser()
@@ -24,7 +25,10 @@ args = ap.parse_args()
 X = np.load(args.features)
 y = np.load(args.targets)
 
-model = RandomForestClassifier(random_state=42)
+# model = RandomForestClassifier(random_state=42)
+# model.fit(X, y)
+
+model = KNeighborsClassifier(n_neighbors=3)
 model.fit(X, y)
 
 pickle.dump(model, open(os.path.join(args.output, args.name + '.sav'), 'wb'))
