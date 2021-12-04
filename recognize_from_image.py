@@ -12,7 +12,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('--name', default='webface',
                 help='Name of your model zoo')
 
-ap.add_argument('--model', default='my_model.sav',
+ap.add_argument('--model', default='./model/my_model.sav',
                 help='Path to classifier model')
 
 ap.add_argument('--input-path', default='./testset/test.jpg',
